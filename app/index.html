@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Lab — GTA-style cover art maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VCL</span>
+    <div>
+      <h1>Vice Cover Lab</h1>
+      <p>Turn your own photos into multi-panel cover art. Everything stays on your machine.</p>
+    </div>
+  </div>
+  <button id="exportBtn" class="export-btn" type="button">Export PNG</button>
+</header>
+
+<main class="layout">
+  <aside class="controls">
+    <section>
+      <h2>1 · Your photos</h2>
+      <label class="drop" id="dropZone">
+        <input id="fileInput" type="file" accept="image/*" multiple hidden>
+        <span>Drop photos here or click to choose</span>
+        <small>Photos are read locally — never uploaded.</small>
+      </label>
+      <div class="photo-strip" id="photoStrip"></div>
+      <p class="hint">Pick a photo, then click a panel to place it there — or fill every panel with it:</p>
+      <button id="fillAllBtn" class="ghost-btn" type="button">Fill all panels with picked photo</button>
+    </section>
+
+    <section>
+      <h2>2 · Layout</h2>
+      <div class="btn-row" id="layoutRow">
+        <button type="button" data-layout="triptych" class="chip is-on">Triptych · 3</button>
+        <button type="button" data-layout="quad" class="chip">Quad · 4</button>
+        <button type="button" data-layout="collage" class="chip">Collage · 5</button>
+      </div>
+      <h2>Post size</h2>
+      <div class="btn-row" id="sizeRow">
+        <button type="button" data-size="square" class="chip">1080 × 1080</button>
+        <button type="button" data-size="portrait" class="chip is-on">1080 × 1350</button>
+        <button type="button" data-size="wide" class="chip">1920 × 1080</button>
+      </div>
+      <h2>Colour grade</h2>
+      <div class="btn-row" id="gradeRow">
+        <button type="button" data-grade="sunset" class="chip is-on">Vice sunset</button>
+        <button type="button" data-grade="neon" class="chip">Neon nights</button>
+        <button type="button" data-grade="clean" class="chip">Clean</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>3 · Caption</h2>
+      <label class="field">Main title
+        <input id="titleInput" type="text" maxlength="42" value="SUNSET HEIST">
+      </label>
+      <label class="field">Subtitle
+        <input id="subtitleInput" type="text" maxlength="64" value="One last score in the city of neon">
+      </label>
+    </section>
+
+    <section>
+      <h2>4 · Panel photo</h2>
+      <p class="hint" id="panelReadout">Panel 1 selected. Drag on the cover to reposition its photo; scroll to zoom.</p>
+      <label class="field">Zoom
+        <input id="zoomRange" type="range" min="100" max="300" value="100">
+      </label>
+      <label class="field">Shift left / right
+        <input id="oxRange" type="range" min="-50" max="50" value="0">
+      </label>
+      <label class="field">Shift up / down
+        <input id="oyRange" type="range" min="-50" max="50" value="0">
+      </label>
+      <button id="resetPanelBtn" class="ghost-btn" type="button">Reset this panel's crop</button>
+    </section>
+  </aside>
+
+  <section class="stage">
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="coverCanvas" width="1080" height="1350"></canvas>
+    </div>
+    <p class="stage-note">Live preview — the export renders exactly what you see, at full post size. Double-click a panel to reset its crop; arrow keys nudge the selected panel's photo.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>Original fan-made tool. Not affiliated with Rockstar Games; no game artwork, logos or fonts are used.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
